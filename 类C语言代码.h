@@ -7,26 +7,26 @@ typedef int Status;
 typedef int QElemtype;
 #define OK 1;
 #define Error 0;
-
-typedef struct QNode { //¶ÓÁĞµÄÁ´Ê½±íÊ¾
+#this is a test
+typedef struct QNode { //é˜Ÿåˆ—çš„é“¾å¼è¡¨ç¤º
 	QElemtype data;
 	struct QNode *next;
 }QNode, *QueuePtr;
 
-typedef struct { //Á´¶ÓÁĞ
-	QueuePtr rear; //Î²Ö¸Õë
+typedef struct { //é“¾é˜Ÿåˆ—
+	QueuePtr rear; //å°¾æŒ‡é’ˆ
 }LinkQueue;
 
-Status InitQueue(LinkQueue &T) //³õÊ¼»¯Ò»¸öÖ»º¬ÓĞÎ²Ö¸ÕëµÄµ¥Ñ­»·Á´±í±íÊ¾¶ÓÁĞ
+Status InitQueue(LinkQueue &T) //åˆå§‹åŒ–ä¸€ä¸ªåªå«æœ‰å°¾æŒ‡é’ˆçš„å•å¾ªç¯é“¾è¡¨è¡¨ç¤ºé˜Ÿåˆ—
 {
 	T.rear = (QueuePtr)malloc(sizeof(QNode));
 	T.rear->next = T.rear;
 	return OK;
 }
 
-bool EmptyQueue(LinkQueue T)    //ÅĞ¶ÏÊÇ·ñÎª¿Õ¶ÓÁĞ
+bool EmptyQueue(LinkQueue T)    //åˆ¤æ–­æ˜¯å¦ä¸ºç©ºé˜Ÿåˆ—
 {
-	if (T.rear->next == T.rear) //Èç¹ûÎ²Ö¸ÕëÖ¸Ïò×Ô¼º£¬ËµÃ÷¶ÓÁĞÎª¿Õ
+	if (T.rear->next == T.rear) //å¦‚æœå°¾æŒ‡é’ˆæŒ‡å‘è‡ªå·±ï¼Œè¯´æ˜é˜Ÿåˆ—ä¸ºç©º
 	{
 		return OK;
 	}
@@ -34,7 +34,7 @@ bool EmptyQueue(LinkQueue T)    //ÅĞ¶ÏÊÇ·ñÎª¿Õ¶ÓÁĞ
 		return 0;
 }
 
-Status EnQueue(LinkQueue &T, QElemtype e) //ÔÚ¶ÓÎ²²åÈëÔªËØ
+Status EnQueue(LinkQueue &T, QElemtype e) //åœ¨é˜Ÿå°¾æ’å…¥å…ƒç´ 
 {
 	QueuePtr p = (QueuePtr)malloc(sizeof(QNode));
 	if (!p)
@@ -42,52 +42,52 @@ Status EnQueue(LinkQueue &T, QElemtype e) //ÔÚ¶ÓÎ²²åÈëÔªËØ
 		return Error;
 	}
 	p->data = e;
-	p->next = T.rear->next; //ÁîpÖ¸Ïò¶ÓÍ·ÔªËØ
-	T.rear->next = p; //ÁîÔ­¶ÓÎ²ÔªËØÖ¸Ïòp£»
-	T.rear = p; //Áîp³ÉÎªĞÂµÄ¶ÓÎ²
+	p->next = T.rear->next; //ä»¤pæŒ‡å‘é˜Ÿå¤´å…ƒç´ 
+	T.rear->next = p; //ä»¤åŸé˜Ÿå°¾å…ƒç´ æŒ‡å‘pï¼›
+	T.rear = p; //ä»¤pæˆä¸ºæ–°çš„é˜Ÿå°¾
 	return OK;
 }
 
-QElemtype DeQueue(LinkQueue &T, QElemtype &e) //É¾³ı¶ÓÍ·ÔªËØ
+QElemtype DeQueue(LinkQueue &T, QElemtype &e) //åˆ é™¤é˜Ÿå¤´å…ƒç´ 
 {
 	QueuePtr p = (QueuePtr)malloc(sizeof(QNode));
 	if (EmptyQueue(T))
 		return Error;
-	p = T.rear->next;   //pÖ¸Ïò¶ÓÍ·ÔªËØ
+	p = T.rear->next;   //pæŒ‡å‘é˜Ÿå¤´å…ƒç´ 
 	e = p->data;
-	T.rear->next = p->next; //ÁîÎ²Ö¸ÕënextÖ¸Ïò¶ÓÍ·ÔªËØµÄÏÂÒ»¸öÔªËØ£¬¼´É¾³ı¶ÓÍ·ÔªËØ
-	free(p); //ÊÍ·Å¶ÓÍ·ÔªËØ
+	T.rear->next = p->next; //ä»¤å°¾æŒ‡é’ˆnextæŒ‡å‘é˜Ÿå¤´å…ƒç´ çš„ä¸‹ä¸€ä¸ªå…ƒç´ ï¼Œå³åˆ é™¤é˜Ÿå¤´å…ƒç´ 
+	free(p); //é‡Šæ”¾é˜Ÿå¤´å…ƒç´ 
 	return OK;
 }
 
-BiTree firstLeaf;	//Ò¶×Ó½áµãµÃµ½µÄÁ´±íµÄ¿ªÊ¼½áµã
-BiTree pcur;	//µ±Ç°Ö¸ÏòµÄÒ¶×Ó½áµã
+BiTree firstLeaf;	//å¶å­ç»“ç‚¹å¾—åˆ°çš„é“¾è¡¨çš„å¼€å§‹ç»“ç‚¹
+BiTree pcur;	//å½“å‰æŒ‡å‘çš„å¶å­ç»“ç‚¹
 
-Status leafLink(BiTree T)	//½«Ò¶×Ó½áµã´Ó×óµ½ÓÒÁ¬½Ó³Éµ¥Á´±í
+Status leafLink(BiTree T)	//å°†å¶å­ç»“ç‚¹ä»å·¦åˆ°å³è¿æ¥æˆå•é“¾è¡¨
 {
-	if (!T)	//Èç¹ûÎª¿ÕÊ÷£¬ÍË³ö
+	if (!T)	//å¦‚æœä¸ºç©ºæ ‘ï¼Œé€€å‡º
 	{
 		return Error;
 	}
-	if (T->lchild == NULL && T->rchild == NULL)	//Èç¹ûµ±Ç°Ê÷Ö»ÓĞ¸ù½áµã£¨µ±Ç°½áµãÎªÒ¶×Ó½áµã£©
+	if (T->lchild == NULL && T->rchild == NULL)	//å¦‚æœå½“å‰æ ‘åªæœ‰æ ¹ç»“ç‚¹ï¼ˆå½“å‰ç»“ç‚¹ä¸ºå¶å­ç»“ç‚¹ï¼‰
 	{
-		if (firstLeaf == NULL)	//µÚÒ»´ÎÕÒµ½Ò¶×Ó½ÚµãÊ±
+		if (firstLeaf == NULL)	//ç¬¬ä¸€æ¬¡æ‰¾åˆ°å¶å­èŠ‚ç‚¹æ—¶
 		{
-			firstLeaf = T; // ±£´æÕÒµ½µÄµÚÒ»¸öÒ¶×Ó½áµã
+			firstLeaf = T; // ä¿å­˜æ‰¾åˆ°çš„ç¬¬ä¸€ä¸ªå¶å­ç»“ç‚¹
 			pcur = firstLeaf;
 		}
 		else
 		{
-			// Á´½ÓÊ±ÓÃÒ¶×Ó½áµãµÄrchildÓò´æ·ÅÖ¸Õë
+			// é“¾æ¥æ—¶ç”¨å¶å­ç»“ç‚¹çš„rchildåŸŸå­˜æ”¾æŒ‡é’ˆ
 			pcur->rchild = T;
 			pcur = pcur->rchild;
 		}
 	}
-	if (T->lchild)	//¶Ô×ó×ÓÊ÷²éÕÒÒ¶×Ó½áµã
+	if (T->lchild)	//å¯¹å·¦å­æ ‘æŸ¥æ‰¾å¶å­ç»“ç‚¹
 	{
 		leafLink(T->lchild);
 	}
-	if (T->rchild)	//¶ÔÓÒ×ÓÊ÷²éÕÒÒ¶×Ó½áµã
+	if (T->rchild)	//å¯¹å³å­æ ‘æŸ¥æ‰¾å¶å­ç»“ç‚¹
 	{
 		leafLink(T->rchild);
 	}
@@ -101,7 +101,7 @@ Status Bigger(int a, int b)
 
 Status getMax(BiTree T)
 {
-	if (T == NULL)	//Èç¹ûÊÇ¿ÕÊ÷£¬»òÕß±éÀúµ½Ò¶×Ó½áµãµÄ×óÓÒº¢×Ó
+	if (T == NULL)	//å¦‚æœæ˜¯ç©ºæ ‘ï¼Œæˆ–è€…éå†åˆ°å¶å­ç»“ç‚¹çš„å·¦å³å­©å­
 	{
 		return 0;
 	}
